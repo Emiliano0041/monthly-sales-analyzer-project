@@ -22,29 +22,147 @@ sales_data = [
     {"day": 20, "product_a": 210, "product_b": 57, "product_c": 324}
 ]
 
-def total_sales_by_product(data, product_key):
-    """Calculates the total sales of a specific product in 30 days."""
-    pass
+def total_sales_by_product(sales_data, product_a):
+    total_sales_product_a= 0
+    for product in sales_data:
+        total_sales_product_a += product[product_a]
+    return total_sales_product_a
+total_sales_by_product(sales_data,"product_a")
+sales= total_sales_by_product(sales_data,"product_a")
+print(f"Las ventas totales de producto A fueron: {sales}")
+    
+#   """Calculates the total sales of a specific product in 30 days."""
+
+    
 
 
-def average_daily_sales(data, product_key):
-    """Calculates the average daily sales of a specific product."""
-    pass
+def average_daily_sales(sales_data, product_a):
+    media_sales = total_sales_by_product(sales_data, product_a) / len(sales_data)
+    return media_sales
+
+average_daily_sales (sales_data,"product_a")
+media= average_daily_sales (sales_data,"product_a")
+print(f"La media total de ventas del producto A fue de: {media}")
 
 
-def best_selling_day(data):
-    """Finds the day with the highest total sales."""
-    pass
 
 
-def days_above_threshold(data, product_key, threshold):
-    """Counts how many days the sales of a product exceeded a given threshold."""
-    pass
+#    """Calculates the average daily sales of a specific product."""
 
 
-def top_product(data):
-    """Determines which product had the highest total sales in 30 days."""
-    pass
+
+def best_selling_day(sales_data):
+  max_sales_by_day= 0
+  best_day=None
+  for day_sales in sales_data:
+    daily_sales= day_sales["product_a"] + day_sales["product_b"] + day_sales["product_c"]
+    if daily_sales > max_sales_by_day:
+      max_sales_by_day = daily_sales
+      best_day = day_sales["day"]
+  return best_day
+    
+
+best_selling_day(sales_data)
+best_day=best_selling_day(sales_data)
+print(f"El mejor dia de venta fue el dia numero {best_day}")
+
+     
+
+
+#    """Finds the day with the highest total sales."""
+ 
+
+
+
+def suma_sales(product_a,product_b,product_c,sales_data):
+  daily_sales = 0
+  for day in sales_data:
+    daily_sales += day["product_a"] + day["product_b"] + day["product_c"]
+  return daily_sales
+suma_sales ("product_a","product_b","product_c",sales_data)
+total_sales= suma_sales("product_a","product_b","product_c",sales_data)
+print(f"Las suma total de todas las ventas fue de {total_sales}")
+ 
+
+def media_sales(sales_data):
+      media = suma_sales ("product_a","product_b","product_c",sales_data) / len(sales_data)
+      return media
+media_sales(sales_data)
+media_total= media_sales(sales_data)
+print(f"La media total de ventas por dia fue de {media_total}")
+
+
+
+def days_above_threshold(sales_data):
+  days_yes=[]
+  for day in sales_data:
+    day_sales= day["product_a"] + day["product_b"] + day["product_c"]
+    if day_sales >= media_sales(sales_data):
+      days_yes.append(day_sales)
+
+  return len(days_yes)
+
+days_above_threshold(sales_data)
+days= days_above_threshold(sales_data)
+print(f"La cantidad de dias que superaron la media de venta fue: {days}")
+
+
+
+
+
+
+
+
+#    """Counts how many days the sales of a product exceeded a given threshold."""
+
+def top_product(sales_data):
+  
+  def sales_tot_product_b (sales_data, product_b):
+    total_sales_b = 0
+    for product in sales_data:
+      total_sales_b += product[product_b]
+    return total_sales_b
+  sales_tot_product_b(sales_data,"product_b")
+
+  def sales_tot_product_c(sales_data, product_c):
+    total_sales_c = 0
+    for product in sales_data:
+      total_sales_c += product[product_c]
+    return total_sales_c
+  sales_tot_product_c(sales_data,"product_c")
+
+  product__a = total_sales_by_product(sales_data,"product_a")
+  product__b = sales_tot_product_b(sales_data,"product_b")
+  product__c = sales_tot_product_c(sales_data,"product_c")
+
+  if product__a > product__b and product__a > product__c:
+    return "product_a"
+
+  elif product__b > product__a and product__b > product__c:
+    return "product_b"
+  else:
+    return "product_c"
+
+best_product=top_product(sales_data)
+
+print(f"El producto mas vendido fue: {best_product}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#    """Determines which product had the highest total sales in 30 days."""
+  
 
 
 
