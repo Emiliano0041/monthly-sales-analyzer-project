@@ -148,6 +148,46 @@ best_product=top_product(sales_data)
 print(f"El producto mas vendido fue: {best_product}")
 
 
+#Peor dia de venta
+
+
+def worst_sales_day (sales_data):
+  min_sales= 574.85
+  worst_day= None
+  for day in sales_data:
+    daily_sales = day["product_a"] + day["product_b"] + day["product_c"]
+    if daily_sales < min_sales:
+      min_sales = daily_sales
+      worst_day = day["day"]
+  return worst_day
+
+worst_sales_day(sales_data)
+worst= worst_sales_day(sales_data)
+print(f"El peor dia de venta fue el dia numero:{worst}")
+
+
+
+def ordenados(sales_data):
+  new_data={}
+  for day in sales_data:
+    new_data.update({day["day"]:(day["product_a"]+day["product_b"]+day["product_c"])})
+    new_data_ordenado=dict(sorted(new_data.items(),key=lambda item:item[1],reverse=True))
+    primeros_tres=list(new_data_ordenado.items())[:3]
+  return primeros_tres
+orden=ordenados(sales_data)
+print(f"Los tres dias que mayores ventas tuvieron fueron{orden}")
+
+
+def rango(sales_data, product_a):
+  sales_product_a= []
+  for producto in sales_data:
+    sales_product_a.append(producto["product_a"])
+    min_max= min(sales_product_a),max(sales_product_a)
+  return min_max
+
+rango(sales_data, "product_a")
+max_min= rango(sales_data, "product_a")
+print(f"Las ventas minimas y maximas del producto A respectivamente fueron: {max_min}")
 
 
 
@@ -161,7 +201,11 @@ print(f"El producto mas vendido fue: {best_product}")
 
 
 
-#    """Determines which product had the highest total sales in 30 days."""
+
+
+
+
+
   
 
 
